@@ -7,8 +7,14 @@ const login = (info) => {
     let user = new User();
 
     user.find(info, (error, userData) => {
+
       if (error) reject({
         message: 'Login Failed.',
+        status: 500
+      });
+
+      if(!userData) reject({
+        message: 'Login Failed. User does not Exist.',
         status: 500
       });
 
