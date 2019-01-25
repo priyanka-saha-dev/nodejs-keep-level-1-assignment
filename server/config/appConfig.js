@@ -5,6 +5,7 @@ const serverConfig = {
 }
 const dbConfig = {
   mongoUrl: 'mongodb://localhost:27017/testDB'
+  //mongoUrl : 'mongodb://localhost/keep'
 }
 module.exports = {
   serverConfig,

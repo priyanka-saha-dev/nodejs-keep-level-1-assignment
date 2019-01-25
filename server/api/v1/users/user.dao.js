@@ -28,22 +28,26 @@ const login = (info) => {
 };
 
 const register = (info) => {
-  console.log('user data for Register: ', info);
-
+  
   return new Promise((resolve, reject) => {
     let user = new User(info);
 
+    console.log('user data for Register: ', user);
     user.save((error, userData) => {
-      if (error) reject({
-        message: 'Registration Failed.',
-        status: 500
-      });
-
-      else resolve({
-        message: 'Registration Success.',
-        status: 201,
-        userData: userData.userName
-      });
+      if (error) {
+        console.log('Error occured in DAO', error);
+        reject({
+          message: 'Registration Failed.',
+          status: 500
+        });
+      } else {
+        console.log('Success occured in DAO');
+        resolve({
+          message: 'Registration Success.',
+          status: 201,
+          userData: userData.userName
+        });
+      }
     });
   });
 };

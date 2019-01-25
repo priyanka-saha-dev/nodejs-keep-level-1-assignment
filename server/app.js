@@ -5,7 +5,7 @@ let bodyparser = require('body-parser');
 let api = require('./api/v1');
 
 //write your logic here
-modules.initializeMongooseConnection;
+modules.initializeMongooseConnection();
 
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: false }));
