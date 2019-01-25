@@ -4,9 +4,7 @@ const login = (info) => {
   console.log('user data for Login: ', info);
 
   return new Promise((resolve, reject) => {
-    let user = new User();
-
-    user.find(info, (error, userData) => {
+    User.findOne(info, (error, userData) => {
 
       if (error) reject({
         message: 'Login Failed.',
@@ -36,10 +34,19 @@ const register = (info) => {
     user.save((error, userData) => {
       if (error) {
         console.log('Error occured in DAO', error);
-        reject({
-          message: 'Registration Failed.',
-          status: 500
-        });
+
+        if(error.message.includes('duplicate')) {
+          reject({
+            message: 'Registration Duplicate.',
+            status: 500
+          });
+        } else {
+          reject({
+            message: 'Registration Failed.',
+            status: 500
+          });
+        }
+
       } else {
         console.log('Success occured in DAO');
         resolve({
