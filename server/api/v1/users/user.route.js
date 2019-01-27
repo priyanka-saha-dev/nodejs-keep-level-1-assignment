@@ -1,10 +1,6 @@
 const router = require('express').Router();
 const controller = require('./user.controller');
 
-// router.get('/register', (req, res, next) => {
-//   res.status(200).send('OK');
-// });
-
 router.post('/login', (req, res, next) => {
   controller.login(req.body).then((response) => {
     console.log('Promise resolved');
@@ -31,5 +27,9 @@ router.post('/register', (req, res, next) => {
 
   });
 });
+
+router.get('/', (req, res, next) => {
+  res.send('Users API');
+})
 
 module.exports = router;
