@@ -15,7 +15,7 @@ app.use(bodyparser.urlencoded({ extended: false }));
 
 app.use('/api/v1/', apiRouter);
 
-app.use((req, res, next) => {
+app.use((req, res) => {
     let err = {
         message: 'Invalid route',
         status: 404

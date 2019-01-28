@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const { dbConfig } = require('../config/index').appConfig;
 
 const connectToMongo = () => {
-  mongoose.connect(dbConfig.mongoUrl);
+  mongoose.connect(dbConfig.mongoUrl, { useNewUrlParser: true });
   console.log("Connected to MONGO");
 };
 
