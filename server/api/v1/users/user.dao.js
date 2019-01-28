@@ -4,23 +4,34 @@ const login = (info) => {
   //console.log('user data for Login: ', info);
 
   return new Promise((resolve, reject) => {
-    User.findOne(info, (error, doc) => {
+    const query = {
+      username : info.username
+    };
 
-      if (error) reject({
-        message: 'Login Failed.',
-        status: 500
-      });
+    User.findOne(query, (error, doc) => {
 
-      if(!doc) reject({
-        message: 'Login Failed. User does not Exist.',
-        status: 500
-      });
-
-      else resolve({
-        message: 'Login Success.',
-        status: 201,
-        userData: doc
-      });
+      if (error) {
+        reject({
+          message: 'Login Failed.',
+          status: 500
+        });
+      } else if(!doc) {
+        reject({
+          message: 'You are not registered user',
+          status: 500
+        });
+      } else if(doc.password !== info.password) {
+        reject({
+          message: 'Password is incorrect',
+          status: 500
+        });
+      } else {
+        resolve({
+          message: 'Login Success.',
+          status: 200,
+          userData: doc
+        });
+      }
     });
   });
 };
@@ -37,7 +48,7 @@ const register = (info) => {
 
         if(error.message.includes('duplicate')) {
           reject({
-            message: 'Registration Duplicate.',
+            message: 'username is already exist',
             status: 500
           });
         } else {
