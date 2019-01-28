@@ -11,7 +11,7 @@ router.route('/')
         controller.getNoteForUserID(userid).then((response) => {
             res.status(response.status).send(response);
         }).catch((error) => {
-            console.log('Promise rejected with', error);
+            //console.log('Promise rejected with', error);
             res.status(error.status).send(error);
         })
 
@@ -19,7 +19,7 @@ router.route('/')
         controller.createNote(req.body, req.query.userId).then((response) => {
             res.status(response.status).send(response);
         }).catch((error) => {
-            console.log('Promise rejected with', error);
+            //console.log('Promise rejected with', error);
             res.status(error.status).send(error);
         });
     });
@@ -34,7 +34,7 @@ router.route('/:noteId')
         controller.getNoteForNoteID(noteid).then((response) => {
             res.status(response.status).send(response);
         }).catch((error) => {
-            console.log('Promise rejected with', error);
+            //console.log('Promise rejected with', error);
             res.status(error.status).send(error);
         })
 
@@ -44,7 +44,7 @@ router.route('/:noteId')
         controller.updateNotes(req.body, noteid).then((response) => {
             res.status(response.status).send(response);
         }).catch((error) => {
-            console.log('Promise rejected with', error);
+            //console.log('Promise rejected with', error);
             res.status(error.status).send(error);
         })
 

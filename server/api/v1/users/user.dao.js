@@ -1,7 +1,7 @@
 const User = require('./user.entity');
 
 const login = (info) => {
-  console.log('user data for Login: ', info);
+  //console.log('user data for Login: ', info);
 
   return new Promise((resolve, reject) => {
     User.findOne(info, (error, doc) => {
@@ -30,10 +30,10 @@ const register = (info) => {
   return new Promise((resolve, reject) => {
     let user = new User(info);
 
-    console.log('user data for Register: ', user);
+    //console.log('user data for Register: ', user);
     user.save((error, doc) => {
       if (error) {
-        console.log('Error occured in DAO', error);
+        //console.log('Error occured in DAO', error);
 
         if(error.message.includes('duplicate')) {
           reject({
@@ -48,7 +48,7 @@ const register = (info) => {
         }
 
       } else {
-        console.log('Success occured in DAO');
+        //console.log('Success occured in DAO');
         resolve({
           message: 'Registration Success.',
           status: 201,

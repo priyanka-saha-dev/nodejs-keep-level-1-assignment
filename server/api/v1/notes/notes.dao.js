@@ -1,7 +1,7 @@
 const Notes = require('./notes.entity');
 
 const createNote = (data, userId) => {
-    console.log('creating note : ', data);
+    //console.log('creating note : ', data);
 
     return new Promise((resolve, reject) => {
 
@@ -43,7 +43,7 @@ const createNote = (data, userId) => {
 };
 
 const getNoteForUserID = (userID) => {
-    console.log('getting note for userID : ', userID);
+    //console.log('getting note for userID : ', userID);
 
     return new Promise((resolve, reject) => {
         const query = {
@@ -72,7 +72,7 @@ const getNoteForUserID = (userID) => {
 };
 
 const updateNotes = (data, noteid) => {
-    console.log('updating note for noteid : ', noteid);
+    //console.log('updating note for noteid : ', noteid);
 
     return new Promise((resolve, reject) => {
         let query = {
@@ -100,7 +100,7 @@ const updateNotes = (data, noteid) => {
                     status: 500
                 });
             } else {
-                console.log('updated doc : ', doc);
+                //console.log('updated doc : ', doc);
                 resolve({
                     message: 'Notes updated',
                     status: 200,
@@ -113,7 +113,7 @@ const updateNotes = (data, noteid) => {
 };
 
 const getNoteForNoteID = (noteid) => {
-    console.log('Fetching Notes for noteid : ', noteid);
+    //console.log('Fetching Notes for noteid : ', noteid);
 
     return new Promise((resolve, reject) => {
         const query = {

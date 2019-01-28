@@ -4,7 +4,7 @@ const { dbConfig } = require('../config/index').appConfig;
 
 const connectToMongo = () => {
   mongoose.connect(dbConfig.mongoUrl, { useNewUrlParser: true });
-  console.log("Connected to MONGO");
+  //console.log("Connected to MONGO");
 };
 
 const getMongoConnection = () => mongoose.connection;
