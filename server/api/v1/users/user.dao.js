@@ -4,14 +4,14 @@ const login = (info) => {
   console.log('user data for Login: ', info);
 
   return new Promise((resolve, reject) => {
-    User.findOne(info, (error, userData) => {
+    User.findOne(info, (error, doc) => {
 
       if (error) reject({
         message: 'Login Failed.',
         status: 500
       });
 
-      if(!userData) reject({
+      if(!doc) reject({
         message: 'Login Failed. User does not Exist.',
         status: 500
       });
@@ -19,7 +19,7 @@ const login = (info) => {
       else resolve({
         message: 'Login Success.',
         status: 201,
-        userData: userData
+        userData: doc
       });
     });
   });
@@ -31,7 +31,7 @@ const register = (info) => {
     let user = new User(info);
 
     console.log('user data for Register: ', user);
-    user.save((error, userData) => {
+    user.save((error, doc) => {
       if (error) {
         console.log('Error occured in DAO', error);
 
@@ -52,7 +52,7 @@ const register = (info) => {
         resolve({
           message: 'Registration Success.',
           status: 201,
-          userData: userData.userName
+          userData: doc.userName
         });
       }
     });
