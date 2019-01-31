@@ -18,18 +18,18 @@ const login = (info) => {
       } else if(!doc) {
         reject({
           message: 'You are not registered user',
-          status: 500
+          status: 403
         });
       } else if(doc.password !== info.password) {
         reject({
           message: 'Password is incorrect',
-          status: 500
+          status: 403
         });
       } else {
         resolve({
           message: 'Login Success.',
           status: 200,
-          userData: doc
+          user: doc
         });
       }
     });
@@ -49,7 +49,7 @@ const register = (info) => {
         if(error.message.includes('duplicate')) {
           reject({
             message: 'username is already exist',
-            status: 500
+            status: 403
           });
         } else {
           reject({
@@ -63,7 +63,7 @@ const register = (info) => {
         resolve({
           message: 'Registration Success.',
           status: 201,
-          userData: doc.userName
+          userInfo: doc.username
         });
       }
     });

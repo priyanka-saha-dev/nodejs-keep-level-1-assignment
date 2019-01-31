@@ -9,6 +9,7 @@ router.route('/')
 
         const userid = req.query.userId;    //**userId** will be passed as **query param**
         controller.getNoteForUserID(userid).then((response) => {
+            //console.log(response);
             res.status(response.status).send(response);
         }).catch((error) => {
             //console.log('Promise rejected with', error);

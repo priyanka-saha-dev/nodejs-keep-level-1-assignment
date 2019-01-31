@@ -2,16 +2,24 @@ const should = require('chai').should();
 const request = require('supertest');
 const app = require('../app');
 const config = require('./test.config');
-var expect = require('chai').expect;
+const expect = require('chai').expect;
 
 const USER_ID_1 = 'u1';
 const USER_ID_2 = 'u2';
+const USER_ID_3 = 'u3';
 
 const NOTE_1 = {
   id: '001',
   title: 'note1',
   text: 'this is note 1'
 }
+
+const NOTE_2 = {
+  id: '002',
+  title: 'note2',
+  text: 'this is note 2'
+}
+
 //  testsuite
 describe('Testing to add a note', function () {
   //  testcase
@@ -21,24 +29,17 @@ describe('Testing to add a note', function () {
     // response will be added note object
 
     request(app)
-      .post('/api/v1/notes/?userId=u1')
+      .post(`/api/v1/notes/?userId=${USER_ID_1}`)
       .send(NOTE_1)
       .expect(201)
-      .then((res) => {
-        //if (err) return done(err);
-        console.log('done');
-        
-      }).then(() => {
+      .then((response) => {
+        //console.log(response.body.data)
+        expect(response.body.data.id).to.equal(NOTE_1.id);
+        expect(response.body.data.title).to.equal(NOTE_1.title);
+        expect(response.body.data.text).to.equal(NOTE_1.text);
+        expect(response.body.data.userId).to.equal(USER_ID_1);
         done();
-      }).catch((err) => {
-        console.log('not done');
       });
-      // .then((resp) => {
-      //   console.log('resp.body')
-      //   console.log(resp.body.data)
-      //   //expect(resp).to.have.status(200);
-      //   expect(resp.body.data).to.have.property('id');
-      // })
 
     //done();
   });
@@ -48,7 +49,21 @@ describe('Testing to add a note', function () {
     // Should get added note of user 2 as a respone,  need to match added note text value
     // status = 201
     // response will be added note object
-    done();
+
+    request(app)
+      .post(`/api/v1/notes/?userId=${USER_ID_2}`)
+      .send(NOTE_2)
+      .expect(201)
+      .then((response) => {
+        //console.log(response.body.data)
+        expect(response.body.data.id).to.equal(NOTE_2.id);
+        expect(response.body.data.title).to.equal(NOTE_2.title);
+        expect(response.body.data.text).to.equal(NOTE_2.text);
+        expect(response.body.data.userId).to.equal(USER_ID_2);
+        done();
+      });
+
+    //done();
   });
 });
 
@@ -59,7 +74,23 @@ describe('Testing to get all notes', function () {
     // Should get all note as a array those are created by user 1 and Should match recently added note text value
     // status = 200
     // response will be a array or all notes those are added by user 1
-    done();
+
+    request(app)
+      .get(`/api/v1/notes/?userId=${USER_ID_1}`)
+      .expect(200)
+      .then((response) => {
+        //console.log(response.body.data[0]);
+        expect(response.body.data).to.be.an('array');
+        expect(response.body.data[0].id).to.equal(NOTE_1.id);
+        expect(response.body.data[0].title).to.equal(NOTE_1.title);
+        expect(response.body.data[0].text).to.equal(NOTE_1.text);
+        expect(response.body.data[0].userId).to.equal(USER_ID_1);
+        done();
+      }).catch((error) => {
+        done(error);
+      });
+
+    //done();
   });
 
   //  testcase
@@ -67,7 +98,23 @@ describe('Testing to get all notes', function () {
     // Should get all note as a array those are created by user 2 and Should match recently added note text value
     // status = 200
     // response will be a array or all notes those are added by user 2
-    done();
+
+    request(app)
+      .get(`/api/v1/notes/?userId=${USER_ID_2}`)
+      .expect(200)
+      .then((response) => {
+        //console.log(response.body.data[0]);
+        expect(response.body.data).to.be.an('array');
+        expect(response.body.data[0].id).to.equal(NOTE_2.id);
+        expect(response.body.data[0].title).to.equal(NOTE_2.title);
+        expect(response.body.data[0].text).to.equal(NOTE_2.text);
+        expect(response.body.data[0].userId).to.equal(USER_ID_2);
+        done();
+      }).catch((error) => {
+        done(error);
+      });
+
+    //done();
 
   });
 
@@ -76,7 +123,20 @@ describe('Testing to get all notes', function () {
     // should get blank array
     // status = 200
     // response will be an empty array
-    done();
+
+    request(app)
+      .get(`/api/v1/notes/?userId=${USER_ID_3}`)
+      .expect(200)
+      .then((response) => {
+        //console.log(response.body.data[0]);
+        expect(response.body.data).to.be.an('array');
+        expect(response.body.data.length).to.equal(0);
+        done();
+      }).catch((error) => {
+        done(error);
+      });
+
+    //done();
   });
 });
 
@@ -87,6 +147,23 @@ describe('Testing to update a note', function () {
     // Should return updated note and match updated note text value'
     // status = 200
     // response will hold updated note as an object
-    done();
+
+    const nextText = 'This is new text of Note 1.'
+    NOTE_1.text = nextText;
+
+    request(app)
+      .put(`/api/v1/notes/${NOTE_1.id}`)
+      .send(NOTE_1)
+      .expect(200)
+      .then((response) => {
+        //console.log(response.body.data)
+        expect(response.body.data.id).to.equal(NOTE_1.id);
+        expect(response.body.data.title).to.equal(NOTE_1.title);
+        expect(response.body.data.text).to.equal(nextText);
+        expect(response.body.data.userId).to.equal(USER_ID_1);
+        done();
+      });
+
+    //done();
   });
 });
