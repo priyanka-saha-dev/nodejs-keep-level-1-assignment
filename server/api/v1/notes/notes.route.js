@@ -7,7 +7,7 @@ router.route('/')
 
     }).get((req, res, next) => { //API for getting all notes of a user **/api/v1/notes/**
 
-        const userid = req.query.userId;    //**userId** will be passed as **query param**
+        const userid = req.query.userid;    //**userId** will be passed as **query param**
         controller.getNoteForUserID(userid).then((response) => {
             //console.log(response);
             res.status(response.status).send(response);
@@ -17,7 +17,9 @@ router.route('/')
         })
 
     }).post((req, res, next) => {   //API for creating a note **/api/v1/notes/**
-        controller.createNote(req.body, req.query.userId).then((response) => {
+
+        const userid = req.query.userid;    //**userId** will be passed as **query param**
+        controller.createNote(req.body, userid).then((response) => {
             res.status(response.status).send(response);
         }).catch((error) => {
             //console.log('Promise rejected with', error);
