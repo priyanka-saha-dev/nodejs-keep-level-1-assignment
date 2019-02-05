@@ -4,14 +4,10 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
   username: {
-    type: String,
-    lowercase: true,
-    unique: true,
-    require: true
+    type: String
   },
   password: {
-    type: String,
-    require: true
+    type: String
   }
 });
 
