@@ -19,18 +19,23 @@ const createNote = (data, userId) => {
 
         note.save((error, doc) => {
             if (error) {
-                if (error.message.includes('duplicate')) {
-                    reject({
-                        message: 'Note Duplicate.',
-                        status: 500
-                    });
-                } else {
-                    reject({
-                        message: 'Error while adding notes',
-                        status: 500
-                    });
-                }
-                
+                // if (error.message.includes('duplicate')) {
+                //     reject({
+                //         message: 'Note Duplicate.',
+                //         status: 500
+                //     });
+                // } else {
+                //     reject({
+                //         message: 'Error while adding notes',
+                //         status: 500
+                //     });
+                // }
+
+                reject({
+                    message: 'Test error.',
+                    status: 200
+                });
+
             } else {
                 resolve({
                     message: 'Notes added',
