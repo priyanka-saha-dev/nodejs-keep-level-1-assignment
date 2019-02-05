@@ -29,7 +29,7 @@ const login = (info) => {
         resolve({
           message: 'Login Success.',
           status: 200,
-          user: doc
+          userInfo: doc
         });
       }
     });

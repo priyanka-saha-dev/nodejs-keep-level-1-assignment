@@ -35,7 +35,7 @@ const createNote = (data, userId) => {
                 resolve({
                     message: 'Notes added',
                     status: 201,
-                    data: doc
+                    infoInfo: doc
                 });
             }
         })
