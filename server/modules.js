@@ -1,6 +1,9 @@
 const connection = require('./db/index');
 /* Replace undefined with Require of your Mongoose connection initialization method */
-const initializeMongooseConnection = connection.connectToMongo;
+const initializeMongooseConnection = () => {
+	connection.connectToMongo();
+	let dbConnection = connection.getMongoConnection();	
+};
 /* Replace undefined with Require of your note entity*/
 const noteModel = require('./api/v1/notes/notes.entity');
 /* Replace undefined with Require of your user entity*/
