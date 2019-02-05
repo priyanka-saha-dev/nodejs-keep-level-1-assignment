@@ -5,12 +5,12 @@ const createNote = (data, userId) => {
 
     return new Promise((resolve, reject) => {
 
-        if (!data || !data.id || !data.title || !data.text || !userId) {
-            reject({
-                message: 'Invalid request',
-                status: 200
-            });
-        }
+        // if (!data || !data.id || !data.title || !data.text || !userId) {
+        //     reject({
+        //         message: 'Invalid request',
+        //         status: 500
+        //     });
+        // }
 
         let note = new Notes(data);
 
@@ -19,23 +19,18 @@ const createNote = (data, userId) => {
 
         note.save((error, doc) => {
             if (error) {
-                // if (error.message.includes('duplicate')) {
-                //     reject({
-                //         message: 'Note Duplicate.',
-                //         status: 500
-                //     });
-                // } else {
-                //     reject({
-                //         message: 'Error while adding notes',
-                //         status: 500
-                //     });
-                // }
-
-                reject({
-                    message: 'Test error.',
-                    status: 200
-                });
-
+                if (error.message.includes('duplicate')) {
+                    reject({
+                        message: 'Note Duplicate.',
+                        status: 500
+                    });
+                } else {
+                    reject({
+                        message: 'Error while adding notes',
+                        status: 500
+                    });
+                }
+                
             } else {
                 resolve({
                     message: 'Notes added',
