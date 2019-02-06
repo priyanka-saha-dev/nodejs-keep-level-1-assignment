@@ -3,30 +3,23 @@ const Schema = mongoose.Schema;
 
 const notesSchema = new Schema({
   id: {
-    type: String,
-    unique: true,
-    require: true
+    type: String
   },
   title: {
-    type: String,
-    require: true
+    type: String
   },
   text: {
-    type: String,
-    require: true
+    type: String
   },
   state: {
     type: String,
-    require: true,
     enum: ['started', 'not-started', 'completed']
   },
   userId: {
-    type: String,
-    require: true
+    type: String
   },
   createdOn: {
-    type: Date,
-    require: true
+    type: Date
   },
   modifiedOn: {
     type: Date
