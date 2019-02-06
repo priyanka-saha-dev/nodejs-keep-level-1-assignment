@@ -8,7 +8,7 @@ const createNote = (data, userId) => {
         if (!data || !data.id || !data.title) {
             reject({
                 message: 'Invalid request',
-                status: 500
+                status: 501
             });
         }
 
