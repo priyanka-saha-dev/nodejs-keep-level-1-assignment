@@ -5,12 +5,12 @@ const createNote = (data, userId) => {
 
     return new Promise((resolve, reject) => {
 
-        // if (!data || !data.id || !data.title || !data.text || !userId) {
-        //     reject({
-        //         message: 'Invalid request',
-        //         status: 500
-        //     });
-        // }
+        if (!data || !data.id || !data.title || !data.text || !userId) {
+            reject({
+                message: 'Invalid request',
+                status: 500
+            });
+        }
 
         let note = new Notes(data);
 
@@ -34,7 +34,8 @@ const createNote = (data, userId) => {
             } else {
                 resolve({
                     message: 'Notes added',
-                    status: 201
+                    status: 201,
+                    data: doc
                 });
             }
         })
