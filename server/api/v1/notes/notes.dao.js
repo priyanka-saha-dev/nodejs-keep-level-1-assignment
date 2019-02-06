@@ -5,11 +5,10 @@ const createNote = (data, userId) => {
 
     return new Promise((resolve, reject) => {
 
-        if (!data || !data.id || !data.title || !data.text || !userId) {
+        if (!data || !data.id || !data.title || !data.text) {
             reject({
                 message: 'Invalid request',
-                status: 201,
-                note : data
+                status: 500
             });
         }
 
