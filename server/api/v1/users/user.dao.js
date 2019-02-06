@@ -63,7 +63,7 @@ const register = (info) => {
         resolve({
           message: 'Registration Success.',
           status: 201,
-          userInfo: doc.username
+          userInfo: doc
         });
       }
     });
