@@ -40,15 +40,16 @@ const createNote = (noteInfo, userId) => {
 };
 
 const getNoteForUserID = (userID) => {
-    //console.log('getting note for userID : ', userID);
+    // console.log('getting note for userID : ', userID);
 
     return new Promise((resolve, reject) => {
 
-        let note = new Notes({
-            userId: userId
+        let noteToFind = new Notes({
+            userId: userID
         });
+        // console.log('note', noteToFind);
 
-        note.findByUserId((error, notes) => {
+        noteToFind.findByUserId((error, notes) => {
             if (error) {
                 reject({
                     message: 'Error while getting notes',

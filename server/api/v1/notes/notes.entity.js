@@ -32,7 +32,7 @@ const notesSchema = new Schema({
   }
 });
 
-notesSchema.methods.findByUserId = (callback) => {
+notesSchema.methods.findByUserId = function (callback) {
   return this.model('notes')
     .find({
       $or: [
@@ -43,7 +43,7 @@ notesSchema.methods.findByUserId = (callback) => {
     .exec(callback);
 };
 
-notesSchema.methods.findAndUpdateNote = (callback) => {
+notesSchema.methods.findAndUpdateNote = function (callback) {
   return this.model('notes').findOneAndUpdate(
     { id: this.id },
     {
