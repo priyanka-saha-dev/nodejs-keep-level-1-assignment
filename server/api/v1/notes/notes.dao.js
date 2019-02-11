@@ -1,16 +1,20 @@
 const Notes = require('./notes.entity');
+const uuidv1 = require('uuid/v1');
 
-const createNote = (data, userId) => {
+const createNote = (noteInfo, userId) => {
     //console.log('creating note : ', data);
 
     return new Promise((resolve, reject) => {
 
-        let note = new Notes(data);
+        let note = new Notes({
+            id: uuidv1(),
+            title: noteInfo.title,
+            text: noteInfo.text,
+            state: noteInfo.state,
+            userId: userId
+        });
 
-        note.createdOn = new Date();
-        note.userId = userId;
-
-        note.save((error, doc) => {
+        note.save((error, addedNote) => {
             if (error) {
                 if (error.message.includes('duplicate')) {
                     reject({
@@ -23,12 +27,12 @@ const createNote = (data, userId) => {
                         status: 500
                     });
                 }
-                
+
             } else {
                 resolve({
                     message: 'Notes added',
                     status: 201,
-                    data: doc
+                    note: addedNote
                 });
             }
         })
@@ -39,16 +43,18 @@ const getNoteForUserID = (userID) => {
     //console.log('getting note for userID : ', userID);
 
     return new Promise((resolve, reject) => {
-        const query = {
-            userId: userID
-        };
-        Notes.find(query, (error, doc) => {
+
+        let note = new Notes({
+            userId: userId
+        });
+
+        note.findByUserId((error, notes) => {
             if (error) {
                 reject({
                     message: 'Error while getting notes',
                     status: 500
                 });
-            } else if (!doc) {
+            } else if (!notes) {
                 resolve({
                     message: `No Notes found for userID ${userID}`,
                     status: 200
@@ -57,37 +63,33 @@ const getNoteForUserID = (userID) => {
                 resolve({
                     message: 'Notes added',
                     status: 200,
-                    data: doc
+                    notes: notes
                 });
             }
         });
     });
 };
 
-const updateNotes = (data, noteid) => {
-    //console.log('updating note for noteid : ', noteid);
-
+const updateNotes = (note, noteid) => {
+    
     return new Promise((resolve, reject) => {
-        let query = {
+
+        let editedNote = new Notes({
+            title: note.title,
+            text: note.text,
+            state: note.state,
             id: noteid
-        };
+        });
 
-        data.modifiedOn = new Date();
-        let update = {
-            $set: data
-        };
+        editedNote.findAndUpdateNote((err, note) => {
 
-        let options = {
-            new: true
-        };
-
-        Notes.findOneAndUpdate(query, update, options, (err, doc) => {
+            console.log('err', err);
             if (err) {
                 reject({
                     message: 'Error while adding notes',
                     status: 500
                 });
-            } else if (!doc) {
+            } else if (!note) {
                 reject({
                     message: `No document found for NoteID ${noteid}`,
                     status: 500
@@ -97,7 +99,7 @@ const updateNotes = (data, noteid) => {
                 resolve({
                     message: 'Notes updated',
                     status: 200,
-                    data: doc
+                    note: note
                 });
             }
         })
@@ -113,13 +115,13 @@ const getNoteForNoteID = (noteid) => {
             id: noteid
         };
 
-        Notes.findOne(query, (error, doc) => {
+        Notes.findOne(query, (error, note) => {
             if (error) {
                 reject({
                     message: `Error is getting Notes for noteID ${noteid}`,
                     status: 500
                 });
-            } else if (!doc) {
+            } else if (!note) {
                 resolve({
                     message: `No Notes found for for noteID ${noteid}`,
                     status: 200
@@ -128,7 +130,7 @@ const getNoteForNoteID = (noteid) => {
                 resolve({
                     message: 'Notes found',
                     status: 200,
-                    data: doc
+                    note: note
                 });
             }
         });
