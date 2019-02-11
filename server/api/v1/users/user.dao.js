@@ -1,4 +1,5 @@
 const User = require('./user.entity');
+const uuidv1 = require('uuid/v1');
 
 const login = (info) => {
   //console.log('user data for Login: ', info);
@@ -41,7 +42,9 @@ const register = (info) => {
   return new Promise((resolve, reject) => {
     let user = new User(info);
 
-    //console.log('user data for Register: ', user);
+    user.userId = uuidv1();
+
+    // console.log('user data for Register: ', user);
     user.save((error, doc) => {
       if (error) {
         //console.log('Error occured in DAO', error);

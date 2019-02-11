@@ -3,6 +3,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
+  userId : {
+    type: String,
+    unique: true,
+    require: true
+  },
   username: {
     type: String,
     unique: true,
