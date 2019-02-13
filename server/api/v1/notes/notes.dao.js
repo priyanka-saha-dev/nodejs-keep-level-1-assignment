@@ -79,7 +79,7 @@ const updateNotes = (noteid, note) => {
       id: noteid
     };
 
-    noteModel.findOneAndUpdate(noteToFind, editedNote, (err, note) => {
+    noteModel.findOneAndUpdate(noteToFind, editedNote, {new: true}, (err, note) => {
 
       // console.log('err', err);
       if (err) {
