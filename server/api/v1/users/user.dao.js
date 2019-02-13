@@ -28,14 +28,14 @@ const login = (info) => {
         });
       } else {
 
-        // let user = {
-        //   userName : doc.username,
-        //   userId : doc.userId
-        // }
+        let user = {
+          userName : doc.username,
+          userId : doc.userId
+        }
         resolve({
           message: 'Login Success.',
           status: 200,
-          userName: doc.username
+          user: user
         });
       }
     });
@@ -68,14 +68,14 @@ const register = (info) => {
 
       } else {
         //console.log('Success occured in DAO');
-        // let user = {
-        //   userName : doc.username,
-        //   userId : doc.userId
-        // }
+        let user = {
+          userName : doc.username,
+          userId : doc.userId
+        }
         resolve({
           message: 'Registration Success.',
           status: 201,
-          userName: doc.username
+          user: user
         });
       }
     });
