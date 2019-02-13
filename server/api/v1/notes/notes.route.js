@@ -29,14 +29,19 @@ router.route('/')
 
   }).get((req, res, next) => { //API for getting all notes of a user **/api/v1/notes/**
 
-    const userid = req.query.userId;    //**userId** will be passed as **query param**
-    controller.getNoteForUserID(userid).then((response) => {
-      //console.log(response);
-      res.status(response.status).send(response);
-    }).catch((error) => {
-      //console.log('Promise rejected with', error);
-      res.status(error.status).send(error);
-    })
+    try {
+      const userid = req.query.userId;    //**userId** will be passed as **query param**
+      controller.getNoteForUserID(userid).then((response) => {
+        //console.log(response);
+        res.status(response.status).send(response.notes);
+      }).catch((error) => {
+        //console.log('Promise rejected with', error);
+        res.status(error.status).send(error);
+      });
+    } catch (err) {
+      res.send({ message: 'Failed to complete request' });
+    }
+
 
   }).post((req, res) => {   //API for creating a note **/api/v1/notes/**
     try {
