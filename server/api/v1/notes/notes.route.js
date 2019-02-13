@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const notesCtrl = require('./notes.controller');
+const controller = require('./notes.controller');
 
 // api to add a note
 // router.post('/', (req, res) => {
