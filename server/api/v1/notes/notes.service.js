@@ -1,7 +1,7 @@
 const dao = require('./notes.dao');
 
-const createNote = (data, userId) => {
-  return dao.createNote(data, userId);
+const addNote = (data, userId) => {
+  return dao.addNote(data, userId);
 };
 
 const getNoteForUserID = (userId) => {
@@ -17,7 +17,7 @@ const getNoteForNoteID = (noteid) => {
 };
 
 module.exports = {
-  createNote,
+  addNote,
   getNoteForUserID,
   updateNotes,
   getNoteForNoteID
