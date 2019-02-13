@@ -1,7 +1,7 @@
 const svc = require('./notes.service');
 
-const addNote = (data, userId) => {
-  return svc.addNote(data, userId);
+const createNote = (data, userId) => {
+  return svc.createNote(data, userId);
 };
 
 const getNoteForUserID = (userId) => {
@@ -17,7 +17,7 @@ const getNoteForNoteID = (noteid) => {
 };
 
 module.exports = {
-  addNote,
+  createNote,
   getNoteForUserID,
   updateNotes,
   getNoteForNoteID

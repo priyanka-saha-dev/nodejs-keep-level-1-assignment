@@ -167,7 +167,7 @@ const uuidv1 = require('uuid/v1');
 
 
 // handels to insert newly created note into the database
-const addNote = (userId, note) => {
+const createNote = (userId, note) => {
   
   return new Promise((resolve, reject) => {
     let newNote = new noteModel();
@@ -188,5 +188,5 @@ const addNote = (userId, note) => {
 
 
 module.exports = {
-    addNote
+  createNote
      }

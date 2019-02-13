@@ -80,7 +80,7 @@ router.post('/', (req, res) => {
     let note = req.body;
     let userId = req.query.userId;
     try {
-      notesCtrl.addNote(userId, note).then((response) => {
+      notesCtrl.createNote(userId, note).then((response) => {
       //  logger.debug('Inside noteCtrl.addNote success');
       //  logger.info(response.message);
         res.status(response.status).send(response.note);
