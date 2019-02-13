@@ -27,10 +27,15 @@ const login = (info) => {
           status: 403
         });
       } else {
+
+        let user = {
+          userName : user.username,
+          userId : user.userId
+        }
         resolve({
           message: 'Login Success.',
           status: 200,
-          userInfo: doc
+          user: user
         });
       }
     });
@@ -66,7 +71,7 @@ const register = (info) => {
         resolve({
           message: 'Registration Success.',
           status: 201,
-          userInfo: doc.username
+          user: doc
         });
       }
     });

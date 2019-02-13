@@ -4,7 +4,7 @@ const controller = require('./user.controller');
 router.post('/login', (req, res, next) => {
   controller.login(req.body).then((response) => {
     //console.log('Promise resolved');
-    res.status(response.status).send(response);
+    res.status(response.status).send(response.user);
     
   }).catch((error) => {
     //console.log('Promise rejected with', error);
@@ -19,7 +19,7 @@ router.post('/register', (req, res, next) => {
 
   controller.register(req.body).then((response) => {
     //console.log('Promise resolved', response);
-    res.status(response.status).send(response);
+    res.status(response.status).send(response.user);
     
   }).catch((error) => {
     //console.log('Promise rejected with', error);
