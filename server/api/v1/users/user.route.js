@@ -19,7 +19,7 @@ router.post('/register', (req, res, next) => {
 
   controller.register(req.body).then((response) => {
     //console.log('Promise resolved', response);
-    res.status(response.status).send(response.username);
+    res.status(response.status).json(response.username);
     
   }).catch((error) => {
     //console.log('Promise rejected with', error);
