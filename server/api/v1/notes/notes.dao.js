@@ -36,12 +36,12 @@ const getNoteForUserID = (userID) => {
 
     return new Promise((resolve, reject) => {
 
-        let noteToFind = new noteModel({
+        let noteToFind = {
             userId: userID
-        });
-        // console.log('note', noteToFind);
+        };
+        console.log('note', noteToFind);
 
-        noteToFind.findByUserId((error, notes) => {
+        noteModel.find(noteToFind, (error, notes) => {
             if (error) {
                 reject({
                     message: 'Error while getting notes',
