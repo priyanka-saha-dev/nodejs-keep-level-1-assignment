@@ -8,8 +8,8 @@ const getNoteForUserID = (userId) => {
   return svc.getNoteForUserID(userId);
 };
 
-const updateNotes = (data, noteid) => {
-  return svc.updateNotes(data, noteid);
+const updateNotes = (noteid, data) => {
+  return svc.updateNotes(noteid, data);
 };
 
 const getNoteForNoteID = (noteid) => {

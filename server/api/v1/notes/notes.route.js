@@ -64,23 +64,31 @@ router.route('/:noteId')
 
   }).get((req, res, next) => { //API for getting a note **/api/v1/notes/:noteId**
 
-    const noteid = req.params.noteId;   //**noteId** will be passed as route parameters into url
-    controller.getNoteForNoteID(noteid).then((response) => {
-      res.status(response.status).send(response);
-    }).catch((error) => {
-      //console.log('Promise rejected with', error);
-      res.status(error.status).send(error);
-    })
+    try {
+      const noteid = req.params.noteId;   //**noteId** will be passed as route parameters into url
+      controller.getNoteForNoteID(noteid).then((response) => {
+        res.status(response.status).send(response.note);
+      }).catch((error) => {
+        //console.log('Promise rejected with', error);
+        res.status(error.status).send(error);
+      });
+    } catch (err) {
+      res.send({ message: 'Failed to complete request' });
+    }
 
   }).put((req, res, next) => {    //API for updating a note **/api/v1/notes/:noteId**
 
-    const noteid = req.params.noteId;   //**noteId** will be passed as route parameters into url
-    controller.updateNotes(req.body, noteid).then((response) => {
-      res.status(response.status).send(response);
-    }).catch((error) => {
-      //console.log('Promise rejected with', error);
-      res.status(error.status).send(error);
-    })
+    try {
+      const noteid = req.params.noteId;   //**noteId** will be passed as route parameters into url
+      controller.updateNotes(noteid, req.body).then((response) => {
+        res.status(response.status).send(response.note);
+      }).catch((error) => {
+        //console.log('Promise rejected with', error);
+        res.status(error.status).send(error);
+      })
+    } catch (err) {
+      res.send({ message: 'Failed to complete request' });
+    }
 
   });
 

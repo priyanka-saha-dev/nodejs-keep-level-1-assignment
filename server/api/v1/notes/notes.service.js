@@ -8,8 +8,8 @@ const getNoteForUserID = (userId) => {
   return dao.getNoteForUserID(userId);
 };
 
-const updateNotes = (data, noteid) => {
-  return dao.updateNotes(data, noteid);
+const updateNotes = (noteid, data) => {
+  return dao.updateNotes(noteid, data);
 };
 
 const getNoteForNoteID = (noteid) => {
