@@ -68,14 +68,11 @@ const register = (info) => {
 
       } else {
         //console.log('Success occured in DAO');
-        let user = {
-          userName : doc.username,
-          userId : doc.userId
-        }
+        
         resolve({
           message: 'Registration Success.',
           status: 201,
-          user: user
+          userInfo: doc.username
         });
       }
     });
