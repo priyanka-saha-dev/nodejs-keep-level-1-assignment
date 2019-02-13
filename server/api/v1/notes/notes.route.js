@@ -39,25 +39,6 @@ router.route('/')
     })
 
   }).post((req, res) => {   //API for creating a note **/api/v1/notes/**
-    //logger.debug('Inside note.router addNote');
-    // let note = req.body;
-    // let userId = req.query.userId;
-    // try {
-    //   notesCtrl.createNote(userId, note).then((response) => {
-    //   //  logger.debug('Inside noteCtrl.addNote success');
-    //     //logger.info(response.message);
-    //     res.status(response.status).send(response.note);
-    //   }, 
-    //   (err) => {
-    // //    logger.error('Error in noteCtrl.addNote error: ', err.message);
-    //     res.status(err.status).send(err);
-    //   }
-    //   );
-    // } catch (err) {
-    // //  logger.error('Unexpected error in noteCtrl.addNote ', err);
-    //   res.send({message: 'Failed to complete request'})
-    // }
-
     try {
       const userid = req.query.userId;    //**userId** will be passed as **query param**
       controller.createNote(userid, req.body).then((response) => {

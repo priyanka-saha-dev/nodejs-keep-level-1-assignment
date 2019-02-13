@@ -1,5 +1,39 @@
-// const Notes = require('./notes.entity');
-// const uuidv1 = require('uuid/v1');
+const noteModel = require('./notes.entity');
+const uuidv1 = require('uuid/v1');
+
+// handels to insert newly created note into the database
+const createNote = (userId, note) => {
+  
+  return new Promise((resolve, reject) => {
+    let newNote = new noteModel({
+      id : uuidv1(),
+      title : note.title,
+      text : note.text,
+      userId : userId
+    });
+
+    // newNote.id = uuidv1();
+    // newNote.title = note.title;
+    // newNote.text = note.text;
+    // newNote.userId = userId;
+
+    newNote.save((err, note) => {
+      if(err) {
+        logger.error(err);
+        reject({
+          message: 'Internal Server Error', 
+          status: 500
+        });
+      } else {
+        resolve({
+          note: note, 
+          message: 'Note is added successfully', 
+          status:201
+        });
+      }
+    });
+});
+};
 
 // const addNote = (note, userId) => {
 //     //logger.debug('Inside note.dao addNote method');
@@ -161,30 +195,6 @@
 //     updateNotes,
 //     getNoteForNoteID
 // }
-
-let noteModel = require('./notes.entity');
-const uuidv1 = require('uuid/v1');
-
-
-// handels to insert newly created note into the database
-const createNote = (userId, note) => {
-  
-  return new Promise((resolve, reject) => {
-    let newNote = new noteModel();
-    newNote.id = uuidv1();
-    newNote.title = note.title;
-    newNote.text = note.text;
-    newNote.userId = userId;
-    newNote.save((err, note) => {
-      if(err) {
-        logger.error(err);
-        reject({message: 'Internal Server Error', status: 500});
-      } else {
-        resolve({note: note, message: 'Note is added successfully', status:201});
-      }
-    });
-});
-};
 
 
 module.exports = {
