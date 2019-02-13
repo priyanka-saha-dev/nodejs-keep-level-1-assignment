@@ -71,7 +71,7 @@ const register = (info) => {
         resolve({
           message: 'Registration Success.',
           status: 201,
-          user: doc
+          user: doc.username
         });
       }
     });
