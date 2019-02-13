@@ -39,7 +39,7 @@ const getNoteForUserID = (userID) => {
     let noteToFind = {
       userId: userID
     };
-    console.log('note', noteToFind);
+    // console.log('note', noteToFind);
 
     noteModel.find(noteToFind, (error, notes) => {
       if (error) {
