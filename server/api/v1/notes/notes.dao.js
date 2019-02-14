@@ -79,9 +79,12 @@ const updateNotes = (noteid, note) => {
       id: noteid
     };
 
+    //console.log('editedNote', editedNote);
     noteModel.findOneAndUpdate(noteToFind, editedNote, {new: true}, (err, note) => {
 
       // console.log('err', err);
+      // console.log('note', note);
+
       if (err) {
         reject({
           message: 'Error while adding notes',
